@@ -1,0 +1,48 @@
+# ケア・プランニング採用ブログ
+title: "ケア・プランニング 採用ブログ"
+description: "東京都荒川区の介護事業所 ケア・プランニング株式会社の採用情報・お役立ち記事"
+url: "https://shujiro1234.github.io"
+baseurl: "/care-planning-blog"
+lang: ja
+
+# テーマ
+remote_theme: pages-themes/cayman@v0.2.0
+plugins:
+  - jekyll-remote-theme
+  - jekyll-seo-tag
+  - jekyll-sitemap
+
+# ビルド設定
+markdown: kramdown
+permalink: /:year/:month/:day/:title/
+encoding: utf-8
+
+# デフォルト設定
+defaults:
+  - scope:
+      path: ""
+      type: "posts"
+    values:
+      layout: "post"
+      author: "ケア・プランニング株式会社"
+
+# Google Analytics / Search Console（後から設定）
+# google_analytics: "G-XXXXXXXXXX"
+# google_site_verification: "XXXXXXXXXXXXXXXX"
+
+# 採用サイトURL
+recruit_url: "https://recruit.care-planning.co.jp"
+
+# 会社情報
+company:
+  name: "ケア・プランニング株式会社"
+  area: "東京都荒川区"
+  services: "訪問介護・訪問看護・デイサービス・居宅介護支援"
+
+# 除外ファイル
+exclude:
+  - README.md
+  - Gemfile
+  - Gemfile.lock
+  - node_modules
+  - vendor

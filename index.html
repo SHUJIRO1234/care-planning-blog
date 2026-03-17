@@ -1,0 +1,18 @@
+---
+layout: default
+title: "記事一覧"
+---
+
+{% if site.posts.size > 0 %}
+  {% for post in site.posts %}
+  <div class="post-card">
+    <h2><a href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a></h2>
+    <p class="post-meta">{{ post.date | date: "%Y年%m月%d日" }} {% if post.categories.size > 0 %}| {{ post.categories | join: ", " }}{% endif %}</p>
+    <p class="post-excerpt">{{ post.excerpt | strip_html | truncate: 150 }}</p>
+  </div>
+  {% endfor %}
+{% else %}
+  <div class="post-card">
+    <p>まだ記事がありません。最初の記事を <code>_posts/</code> フォルダに追加してください。</p>
+  </div>
+{% endif %}

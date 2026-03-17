@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% if page.title %}{{ page.title }} | {% endif %}{{ site.title }}</title>
+  <meta name="description" content="{{ page.description | default: site.description }}">
+
+  {% seo %}
+
+  <!-- Google Analytics（設定後にコメント解除） -->
+  {% if site.google_analytics %}
+  <script async src="https://www.googletagmanager.com/gtag/js?id={{ site.google_analytics }}"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', '{{ site.google_analytics }}');
+  </script>
+  {% endif %}
+
+  <!-- Google Search Console -->
+  {% if site.google_site_verification %}
+  <meta name="google-site-verification" content="{{ site.google_site_verification }}">
+  {% endif %}
+
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: "Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", sans-serif;
+      line-height: 1.8;
+      color: #333;
+      background: #f9f9f9;
+    }
+    /* ヘッダー */
+    .site-header {
+      background: #2c7a4b;
+      color: #fff;
+      padding: 1.5rem 1rem;
+      text-align: center;
+    }
+    .site-header h1 { font-size: 1.5rem; margin-bottom: 0.3rem; }
+    .site-header p { font-size: 0.9rem; opacity: 0.9; }
+    .site-header a { color: #fff; text-decoration: none; }
+
+    /* ナビ */
+    .site-nav {
+      background: #24633d;
+      text-align: center;
+      padding: 0.5rem;
+    }
+    .site-nav a {
+      color: #fff;
+      text-decoration: none;
+      margin: 0 1rem;
+      font-size: 0.9rem;
+    }
+    .site-nav a:hover { text-decoration: underline; }
+
+    /* メイン */
+    .container {
+      max-width: 800px;
+      margin: 2rem auto;
+      padding: 0 1rem;
+    }
+
+    /* 記事カード */
+    .post-card {
+      background: #fff;
+      border-radius: 8px;
+      padding: 1.5rem;
+      margin-bottom: 1.5rem;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.08);
+    }
+    .post-card h2 { font-size: 1.3rem; margin-bottom: 0.5rem; }
+    .post-card h2 a { color: #2c7a4b; text-decoration: none; }
+    .post-card h2 a:hover { text-decoration: underline; }
+    .post-meta { color: #888; font-size: 0.85rem; margin-bottom: 0.8rem; }
+    .post-excerpt { font-size: 0.95rem; }
+
+    /* 記事本文 */
+    .post-content {
+      background: #fff;
+      border-radius: 8px;
+      padding: 2rem 1.5rem;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.08);
+    }
+    .post-content h1 { font-size: 1.6rem; margin-bottom: 1rem; color: #2c7a4b; }
+    .post-content h2 { font-size: 1.3rem; margin: 1.5rem 0 0.8rem; color: #2c7a4b; }
+    .post-content h3 { font-size: 1.1rem; margin: 1.2rem 0 0.6rem; }
+    .post-content p { margin-bottom: 1rem; }
+    .post-content ul, .post-content ol { margin: 0.5rem 0 1rem 1.5rem; }
+    .post-content img { max-width: 100%; height: auto; border-radius: 4px; }
+
+    /* CTA（応募導線） */
+    .cta-box {
+      background: linear-gradient(135deg, #2c7a4b, #3da066);
+      color: #fff;
+      text-align: center;
+      padding: 2rem 1.5rem;
+      border-radius: 8px;
+      margin: 2rem 0;
+    }
+    .cta-box h3 { font-size: 1.2rem; margin-bottom: 0.8rem; }
+    .cta-box a {
+      display: inline-block;
+      background: #fff;
+      color: #2c7a4b;
+      padding: 0.8rem 2rem;
+      border-radius: 30px;
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 1rem;
+      margin-top: 0.5rem;
+    }
+    .cta-box a:hover { background: #f0f0f0; }
+
+    /* フッター */
+    .site-footer {
+      text-align: center;
+      padding: 2rem 1rem;
+      color: #888;
+      font-size: 0.85rem;
+      border-top: 1px solid #ddd;
+      margin-top: 3rem;
+    }
+    .site-footer a { color: #2c7a4b; }
+  </style>
+</head>
+<body>
+
+  <header class="site-header">
+    <h1><a href="{{ site.baseurl }}/">{{ site.title }}</a></h1>
+    <p>{{ site.company.area }}の介護のお仕事情報</p>
+  </header>
+
+  <nav class="site-nav">
+    <a href="{{ site.baseurl }}/">記事一覧</a>
+    <a href="{{ site.recruit_url }}" target="_blank">採用情報・応募はこちら</a>
+  </nav>
+
+  <main class="container">
+    {{ content }}
+  </main>
+
+  <!-- 全ページ共通CTA -->
+  <div class="container">
+    <div class="cta-box">
+      <h3>ケア・プランニングで一緒に働きませんか？</h3>
+      <p>訪問介護・訪問看護・デイサービスなど、あなたに合った働き方が見つかります</p>
+      <a href="{{ site.recruit_url }}" target="_blank">採用情報を見る →</a>
+    </div>
+  </div>
+
+  <footer class="site-footer">
+    <p>&copy; {{ site.time | date: "%Y" }} {{ site.company.name }} | <a href="{{ site.recruit_url }}" target="_blank">採用サイト</a></p>
+  </footer>
+
+</body>
+</html>
