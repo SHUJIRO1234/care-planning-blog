@@ -28,7 +28,7 @@ defaults:
 
 # Google Analytics / Search Console（後から設定）
 # google_analytics: "G-XXXXXXXXXX"
-# google_site_verification: "XXXXXXXXXXXXXXXX"
+google_site_verification: "fPRgGbiUvT2MUzRSyjNNqa3xgqs057aHvkHABdmZ-eI"
 
 # 採用サイトURL
 recruit_url: "https://recruit.care-planning.co.jp"
