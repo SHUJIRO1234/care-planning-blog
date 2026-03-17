@@ -27,7 +27,7 @@ defaults:
       author: "ケア・プランニング株式会社"
 
 # Google Analytics / Search Console（後から設定）
-# google_analytics: "G-XXXXXXXXXX"
+google_analytics: "G-EHTXDHR1QX"
 google_site_verification: "fPRgGbiUvT2MUzRSyjNNqa3xgqs057aHvkHABdmZ-eI"
 
 # 採用サイトURL
