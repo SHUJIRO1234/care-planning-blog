@@ -2,7 +2,22 @@
 layout: default
 ---
 <article class="post-content">
+  <div class="badge-row" style="margin-bottom: 0.8rem;">
+    {% for cat in page.categories %}
+    <span class="badge
+      {% if cat == '求人情報' %}badge-kyujin
+      {% elsif cat == 'お役立ち情報' %}badge-oyakudachi
+      {% elsif cat == 'PT・OT' %}badge-pt-ot
+      {% elsif cat == '訪問介護' %}badge-houmon-kaigo
+      {% elsif cat == '訪問看護' %}badge-houmon-kango
+      {% elsif cat == 'AI・テクノロジー' %}badge-ai-tech
+      {% elsif cat == '未経験向け' %}badge-mikeiken
+      {% elsif cat == '転職体験談' %}badge-tenshoku
+      {% elsif cat == '資格・キャリア' %}badge-shikaku
+      {% else %}badge-default{% endif %}">{{ cat }}</span>
+    {% endfor %}
+  </div>
   <h1>{{ page.title }}</h1>
-  <p class="post-meta">{{ page.date | date: "%Y年%m月%d日" }} {% if page.categories %} | {{ page.categories | join: ", " }}{% endif %}</p>
+  <p class="post-meta">{{ page.date | date: "%Y年%m月%d日" }}</p>
   {{ content }}
 </article>

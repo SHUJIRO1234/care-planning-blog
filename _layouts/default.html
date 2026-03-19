@@ -8,7 +8,6 @@
 
   {% seo %}
 
-  <!-- Google Analytics（設定後にコメント解除） -->
   {% if site.google_analytics %}
   <script async src="https://www.googletagmanager.com/gtag/js?id={{ site.google_analytics }}"></script>
   <script>
@@ -19,136 +18,433 @@
   </script>
   {% endif %}
 
-  <!-- Google Search Console -->
   {% if site.google_site_verification %}
   <meta name="google-site-verification" content="{{ site.google_site_verification }}">
   {% endif %}
 
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+
   <style>
+    :root {
+      --navy: #1a2744;
+      --navy-light: #2a3a5c;
+      --navy-dark: #0f1a30;
+      --accent-green: #2d9b6e;
+      --accent-green-light: #3dbb88;
+      --accent-orange: #e8834a;
+      --accent-orange-light: #f0a060;
+      --bg-warm: #faf8f5;
+      --bg-card: #ffffff;
+      --text-main: #2a2a2a;
+      --text-sub: #6b7280;
+      --text-light: #9ca3af;
+      --border: #e5e7eb;
+      --radius: 12px;
+      --shadow: 0 2px 8px rgba(26,39,68,0.08);
+      --shadow-hover: 0 8px 24px rgba(26,39,68,0.12);
+    }
+
     * { margin: 0; padding: 0; box-sizing: border-box; }
+
     body {
-      font-family: "Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", sans-serif;
+      font-family: "Noto Sans JP", "Hiragino Kaku Gothic ProN", sans-serif;
       line-height: 1.8;
-      color: #333;
-      background: #f9f9f9;
+      color: var(--text-main);
+      background: var(--bg-warm);
+      -webkit-font-smoothing: antialiased;
     }
-    /* ヘッダー */
+
+    /* ========== ヘッダー ========== */
     .site-header {
-      background: #2c7a4b;
+      background: linear-gradient(135deg, var(--navy) 0%, var(--navy-light) 100%);
       color: #fff;
-      padding: 1.5rem 1rem;
+      padding: 1.8rem 1.5rem;
       text-align: center;
+      position: relative;
+      overflow: hidden;
     }
-    .site-header h1 { font-size: 1.5rem; margin-bottom: 0.3rem; }
-    .site-header p { font-size: 0.9rem; opacity: 0.9; }
+    .site-header::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      right: -20%;
+      width: 400px;
+      height: 400px;
+      background: radial-gradient(circle, rgba(45,155,110,0.15) 0%, transparent 70%);
+      border-radius: 50%;
+    }
+    .site-header h1 {
+      font-size: 1.6rem;
+      font-weight: 700;
+      margin-bottom: 0.3rem;
+      position: relative;
+    }
+    .site-header .subtitle {
+      font-size: 0.9rem;
+      opacity: 0.85;
+      position: relative;
+    }
     .site-header a { color: #fff; text-decoration: none; }
 
-    /* ナビ */
+    /* ========== ナビ ========== */
     .site-nav {
-      background: #24633d;
+      background: var(--navy-dark);
       text-align: center;
-      padding: 0.5rem;
+      padding: 0.6rem 1rem;
+      display: flex;
+      justify-content: center;
+      gap: 0.5rem;
+      flex-wrap: wrap;
     }
     .site-nav a {
-      color: #fff;
+      color: rgba(255,255,255,0.85);
       text-decoration: none;
-      margin: 0 1rem;
-      font-size: 0.9rem;
+      font-size: 0.85rem;
+      padding: 0.4rem 1rem;
+      border-radius: 20px;
+      transition: all 0.2s;
     }
-    .site-nav a:hover { text-decoration: underline; }
+    .site-nav a:hover {
+      background: rgba(255,255,255,0.1);
+      color: #fff;
+    }
+    .site-nav a.nav-cta {
+      background: var(--accent-green);
+      color: #fff;
+      font-weight: 500;
+    }
+    .site-nav a.nav-cta:hover {
+      background: var(--accent-green-light);
+    }
 
-    /* メイン */
+    /* ========== メイン ========== */
     .container {
-      max-width: 800px;
-      margin: 2rem auto;
-      padding: 0 1rem;
-    }
-
-    /* 記事カード */
-    .post-card {
-      background: #fff;
-      border-radius: 8px;
-      padding: 1.5rem;
-      margin-bottom: 1.5rem;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.08);
-    }
-    .post-card h2 { font-size: 1.3rem; margin-bottom: 0.5rem; }
-    .post-card h2 a { color: #2c7a4b; text-decoration: none; }
-    .post-card h2 a:hover { text-decoration: underline; }
-    .post-meta { color: #888; font-size: 0.85rem; margin-bottom: 0.8rem; }
-    .post-excerpt { font-size: 0.95rem; }
-
-    /* 記事本文 */
-    .post-content {
-      background: #fff;
-      border-radius: 8px;
+      max-width: 1080px;
+      margin: 0 auto;
       padding: 2rem 1.5rem;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.08);
     }
-    .post-content h1 { font-size: 1.6rem; margin-bottom: 1rem; color: #2c7a4b; }
-    .post-content h2 { font-size: 1.3rem; margin: 1.5rem 0 0.8rem; color: #2c7a4b; }
-    .post-content h3 { font-size: 1.1rem; margin: 1.2rem 0 0.6rem; }
+    .container-narrow {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 2rem 1.5rem;
+    }
+
+    /* ========== 記事一覧（カードグリッド） ========== */
+    .posts-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .post-card {
+      background: var(--bg-card);
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      transition: transform 0.2s, box-shadow 0.2s;
+      display: flex;
+      flex-direction: column;
+    }
+    .post-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-hover);
+    }
+
+    /* アイキャッチ（カテゴリ別グラデーション） */
+    .post-card-thumb {
+      height: 160px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .post-card-thumb .thumb-icon {
+      font-size: 3rem;
+      opacity: 0.9;
+      position: relative;
+      z-index: 1;
+    }
+    .post-card-thumb::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 40px;
+      background: linear-gradient(transparent, rgba(0,0,0,0.1));
+    }
+
+    /* カテゴリ別カラー */
+    .thumb-kyujin { background: linear-gradient(135deg, #1a2744 0%, #2d5a8e 100%); color: #fff; }
+    .thumb-oyakudachi { background: linear-gradient(135deg, #2d9b6e 0%, #45c48b 100%); color: #fff; }
+    .thumb-pt-ot { background: linear-gradient(135deg, #6c5ce7 0%, #a29bfe 100%); color: #fff; }
+    .thumb-houmon-kango { background: linear-gradient(135deg, #e8834a 0%, #f0a060 100%); color: #fff; }
+    .thumb-ai-tech { background: linear-gradient(135deg, #00b4d8 0%, #48cae4 100%); color: #fff; }
+    .thumb-default { background: linear-gradient(135deg, #6b7280 0%, #9ca3af 100%); color: #fff; }
+
+    .post-card-body {
+      padding: 1.2rem 1.3rem;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* カテゴリバッジ */
+    .badge-row { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-bottom: 0.6rem; }
+    .badge {
+      display: inline-block;
+      font-size: 0.7rem;
+      font-weight: 500;
+      padding: 0.2rem 0.6rem;
+      border-radius: 10px;
+      line-height: 1.4;
+    }
+    .badge-kyujin { background: #e8f0fe; color: #1a2744; }
+    .badge-oyakudachi { background: #e6f7ef; color: #1a6b44; }
+    .badge-pt-ot { background: #ede9fe; color: #5b3cc4; }
+    .badge-houmon-kaigo { background: #dbeafe; color: #1e40af; }
+    .badge-houmon-kango { background: #fef3e2; color: #9a5b13; }
+    .badge-ai-tech { background: #e0f7fa; color: #00695c; }
+    .badge-mikeiken { background: #fce7f3; color: #9d174d; }
+    .badge-tenshoku { background: #fef9c3; color: #854d0e; }
+    .badge-shikaku { background: #f0fdf4; color: #166534; }
+    .badge-default { background: #f3f4f6; color: #4b5563; }
+
+    .post-card-title {
+      font-size: 1.05rem;
+      font-weight: 700;
+      line-height: 1.5;
+      margin-bottom: 0.5rem;
+    }
+    .post-card-title a {
+      color: var(--text-main);
+      text-decoration: none;
+    }
+    .post-card-title a:hover { color: var(--accent-green); }
+
+    .post-card-excerpt {
+      font-size: 0.85rem;
+      color: var(--text-sub);
+      flex: 1;
+      margin-bottom: 0.8rem;
+    }
+    .post-card-date {
+      font-size: 0.75rem;
+      color: var(--text-light);
+    }
+
+    /* ========== 記事本文 ========== */
+    .post-content {
+      background: var(--bg-card);
+      border-radius: var(--radius);
+      padding: 2.5rem 2rem;
+      box-shadow: var(--shadow);
+    }
+    .post-content h1 {
+      font-size: 1.6rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+      color: var(--navy);
+      line-height: 1.5;
+    }
+    .post-content h2 {
+      font-size: 1.3rem;
+      font-weight: 700;
+      margin: 2rem 0 0.8rem;
+      color: var(--navy);
+      padding-bottom: 0.4rem;
+      border-bottom: 2px solid var(--accent-green);
+    }
+    .post-content h3 {
+      font-size: 1.1rem;
+      font-weight: 700;
+      margin: 1.5rem 0 0.6rem;
+      color: var(--navy-light);
+    }
     .post-content p { margin-bottom: 1rem; }
     .post-content ul, .post-content ol { margin: 0.5rem 0 1rem 1.5rem; }
-    .post-content img { max-width: 100%; height: auto; border-radius: 4px; }
-
-    /* CTA（応募導線） */
-    .cta-box {
-      background: linear-gradient(135deg, #2c7a4b, #3da066);
+    .post-content li { margin-bottom: 0.3rem; }
+    .post-content img { max-width: 100%; height: auto; border-radius: 8px; }
+    .post-content table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1rem 0;
+      font-size: 0.9rem;
+    }
+    .post-content th {
+      background: var(--navy);
       color: #fff;
-      text-align: center;
-      padding: 2rem 1.5rem;
-      border-radius: 8px;
-      margin: 2rem 0;
+      padding: 0.6rem 0.8rem;
+      text-align: left;
+      font-weight: 500;
     }
-    .cta-box h3 { font-size: 1.2rem; margin-bottom: 0.8rem; }
-    .cta-box a {
-      display: inline-block;
-      background: #fff;
-      color: #2c7a4b;
-      padding: 0.8rem 2rem;
-      border-radius: 30px;
-      text-decoration: none;
-      font-weight: bold;
-      font-size: 1rem;
-      margin-top: 0.5rem;
+    .post-content td {
+      padding: 0.6rem 0.8rem;
+      border-bottom: 1px solid var(--border);
     }
-    .cta-box a:hover { background: #f0f0f0; }
+    .post-content tr:nth-child(even) td { background: #f8f9fa; }
+    .post-content strong { color: var(--navy); }
 
-    /* フッター */
+    .post-meta {
+      color: var(--text-sub);
+      font-size: 0.85rem;
+      margin-bottom: 1.5rem;
+    }
+
+    /* ========== CTA ========== */
+    .cta-section {
+      background: linear-gradient(135deg, var(--navy) 0%, var(--navy-light) 50%, var(--accent-green) 100%);
+      border-radius: var(--radius);
+      padding: 3rem 2rem;
+      text-align: center;
+      color: #fff;
+      margin: 2.5rem 0;
+      position: relative;
+      overflow: hidden;
+    }
+    .cta-section::before {
+      content: '';
+      position: absolute;
+      top: -100px;
+      right: -100px;
+      width: 300px;
+      height: 300px;
+      background: radial-gradient(circle, rgba(255,255,255,0.08) 0%, transparent 70%);
+      border-radius: 50%;
+    }
+    .cta-section h3 {
+      font-size: 1.4rem;
+      font-weight: 700;
+      margin-bottom: 0.8rem;
+      position: relative;
+    }
+    .cta-section p {
+      font-size: 0.95rem;
+      opacity: 0.9;
+      margin-bottom: 1.5rem;
+      position: relative;
+    }
+    .cta-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+      position: relative;
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 1rem 2.2rem;
+      border-radius: 50px;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 1rem;
+      transition: all 0.2s;
+      cursor: pointer;
+    }
+    .btn-primary {
+      background: #fff;
+      color: var(--navy);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    }
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(0,0,0,0.2);
+    }
+    .btn-secondary {
+      background: var(--accent-orange);
+      color: #fff;
+      box-shadow: 0 4px 12px rgba(232,131,74,0.3);
+    }
+    .btn-secondary:hover {
+      background: var(--accent-orange-light);
+      transform: translateY(-2px);
+    }
+
+    /* ========== フッター ========== */
     .site-footer {
+      background: var(--navy-dark);
+      color: rgba(255,255,255,0.6);
       text-align: center;
       padding: 2rem 1rem;
-      color: #888;
       font-size: 0.85rem;
-      border-top: 1px solid #ddd;
-      margin-top: 3rem;
+      margin-top: 0;
     }
-    .site-footer a { color: #2c7a4b; }
+    .site-footer a {
+      color: var(--accent-green-light);
+      text-decoration: none;
+    }
+    .site-footer a:hover { text-decoration: underline; }
+
+    /* ========== セクションタイトル ========== */
+    .section-title {
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: var(--navy);
+      margin-bottom: 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .section-title::before {
+      content: '';
+      width: 4px;
+      height: 1.3rem;
+      background: var(--accent-green);
+      border-radius: 2px;
+    }
+
+    /* ========== レスポンシブ ========== */
+    @media (max-width: 640px) {
+      .posts-grid {
+        grid-template-columns: 1fr;
+      }
+      .post-card-thumb { height: 130px; }
+      .post-content { padding: 1.5rem 1.2rem; }
+      .cta-section { padding: 2rem 1.2rem; }
+      .cta-section h3 { font-size: 1.2rem; }
+      .btn { padding: 0.8rem 1.5rem; font-size: 0.9rem; }
+      .site-header h1 { font-size: 1.3rem; }
+    }
+
+    /* ========== 空リスト ========== */
+    .empty-state {
+      text-align: center;
+      padding: 3rem;
+      color: var(--text-sub);
+      background: var(--bg-card);
+      border-radius: var(--radius);
+    }
   </style>
 </head>
 <body>
 
   <header class="site-header">
     <h1><a href="{{ site.baseurl }}/">{{ site.title }}</a></h1>
-    <p>{{ site.company.area }}の介護のお仕事情報</p>
+    <p class="subtitle">{{ site.company.area }}の介護のお仕事情報</p>
   </header>
 
   <nav class="site-nav">
     <a href="{{ site.baseurl }}/">記事一覧</a>
-    <a href="{{ site.recruit_url }}" target="_blank">採用情報・応募はこちら</a>
+    <a href="{{ site.recruit_url }}" target="_blank" class="nav-cta">採用情報・応募はこちら</a>
   </nav>
 
-  <main class="container">
+  <main class="{% if page.layout == 'post' %}container-narrow{% else %}container{% endif %}">
     {{ content }}
   </main>
 
-  <!-- 全ページ共通CTA -->
-  <div class="container">
-    <div class="cta-box">
+  <div class="{% if page.layout == 'post' %}container-narrow{% else %}container{% endif %}">
+    <div class="cta-section">
       <h3>ケア・プランニングで一緒に働きませんか？</h3>
-      <p>訪問介護・訪問看護・デイサービスなど、あなたに合った働き方が見つかります</p>
-      <a href="{{ site.recruit_url }}" target="_blank">採用情報を見る →</a>
+      <p>訪問介護・訪問看護・デイサービス・PT/OT<br>あなたに合った働き方が見つかります</p>
+      <div class="cta-buttons">
+        <a href="{{ site.recruit_url }}" target="_blank" class="btn btn-primary">採用情報を見る</a>
+        <a href="{{ site.recruit_url }}/apply" target="_blank" class="btn btn-secondary">今すぐ応募する</a>
+      </div>
     </div>
   </div>
 

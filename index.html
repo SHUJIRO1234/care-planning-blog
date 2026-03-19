@@ -3,16 +3,59 @@ layout: default
 title: "記事一覧"
 ---
 
+<h2 class="section-title">最新の記事</h2>
+
 {% if site.posts.size > 0 %}
+<div class="posts-grid">
   {% for post in site.posts %}
   <div class="post-card">
-    <h2><a href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a></h2>
-    <p class="post-meta">{{ post.date | date: "%Y年%m月%d日" }} {% if post.categories.size > 0 %}| {{ post.categories | join: ", " }}{% endif %}</p>
-    <p class="post-excerpt">{{ post.excerpt | strip_html | truncate: 150 }}</p>
+    <div class="post-card-thumb
+      {% if post.categories contains '求人情報' %}thumb-kyujin
+      {% elsif post.categories contains 'PT・OT' %}thumb-pt-ot
+      {% elsif post.categories contains '訪問看護' %}thumb-houmon-kango
+      {% elsif post.categories contains 'AI・テクノロジー' %}thumb-ai-tech
+      {% elsif post.categories contains 'お役立ち情報' %}thumb-oyakudachi
+      {% else %}thumb-default{% endif %}">
+      <span class="thumb-icon">
+        {% if post.categories contains '求人情報' %}&#128188;
+        {% elsif post.categories contains 'PT・OT' %}&#129507;
+        {% elsif post.categories contains '訪問看護' %}&#127973;
+        {% elsif post.categories contains 'AI・テクノロジー' %}&#129302;
+        {% elsif post.categories contains '訪問介護' %}&#128694;
+        {% elsif post.categories contains '未経験向け' %}&#127793;
+        {% elsif post.categories contains '待遇・働き方' %}&#128176;
+        {% elsif post.categories contains '転職体験談' %}&#128172;
+        {% elsif post.categories contains '資格・キャリア' %}&#127891;
+        {% else %}&#128221;{% endif %}
+      </span>
+    </div>
+    <div class="post-card-body">
+      <div class="badge-row">
+        {% for cat in post.categories %}
+        <span class="badge
+          {% if cat == '求人情報' %}badge-kyujin
+          {% elsif cat == 'お役立ち情報' %}badge-oyakudachi
+          {% elsif cat == 'PT・OT' %}badge-pt-ot
+          {% elsif cat == '訪問介護' %}badge-houmon-kaigo
+          {% elsif cat == '訪問看護' %}badge-houmon-kango
+          {% elsif cat == 'AI・テクノロジー' %}badge-ai-tech
+          {% elsif cat == '未経験向け' %}badge-mikeiken
+          {% elsif cat == '転職体験談' %}badge-tenshoku
+          {% elsif cat == '資格・キャリア' %}badge-shikaku
+          {% else %}badge-default{% endif %}">{{ cat }}</span>
+        {% endfor %}
+      </div>
+      <h3 class="post-card-title">
+        <a href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a>
+      </h3>
+      <p class="post-card-excerpt">{{ post.excerpt | strip_html | truncate: 100 }}</p>
+      <p class="post-card-date">{{ post.date | date: "%Y年%m月%d日" }}</p>
+    </div>
   </div>
   {% endfor %}
+</div>
 {% else %}
-  <div class="post-card">
-    <p>まだ記事がありません。最初の記事を <code>_posts/</code> フォルダに追加してください。</p>
-  </div>
+<div class="empty-state">
+  <p>まだ記事がありません。最初の記事を <code>_posts/</code> フォルダに追加してください。</p>
+</div>
 {% endif %}
